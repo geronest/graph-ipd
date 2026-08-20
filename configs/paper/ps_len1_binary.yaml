@@ -1,0 +1,29 @@
+# [paper] Section 4(b): IPD with partner selection, l = 1, opponent identity: binary.
+# Complete graph over N = 32 agents, 200,000 interaction rounds, 20 seeds.
+# Contributes one point to Figure 6, one panel of Figure 8, one row of
+# Figure 13, and one curve in Figures 11 and 12.
+
+num_steps: 200000        # [paper] 200,000 interaction rounds
+repeat_experiment: 20    # [paper] 20 different seeds
+select_partner: True     # [paper] agents choose their own partner each round
+
+state:
+  len_history: 1          # [paper] l = 1
+  agent_id: "binary"        # [paper] binary
+
+agentnet:
+  name: complete         # [paper] partner selection uses fully connected graphs
+  netsave_step: 10000
+
+# [paper] Section 3(b): partner selection module trained with Soft Actor-Critic.
+# The section key must end in "_ps" -- train_ray.py finds the selector by that
+# suffix and takes the agent type from the prefix ("sac").
+sac_ps:
+  init_params: random
+  dims_hidden_layers: [32, 16]   # [paper] same structure as the dilemma network
+  learning_rate: 0.01            # [repo default] not stated in the paper
+  gamma: 0.99                    # [paper]
+  alpha: 0.01                    # [paper] entropy regularisation weight
+  tau: 0.05                      # [paper] soft target update rate
+  weight_decay: 1e-3             # [repo default] not stated in the paper
+  freq_refresh_target: 16        # [repo default] not stated in the paper

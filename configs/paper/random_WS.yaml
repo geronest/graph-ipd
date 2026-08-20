@@ -1,0 +1,19 @@
+# [paper] Section 4(a): IPD with random matching on Watts-Strogatz graphs.
+# Regular ring of 4 edges per node, rewiring probability p_WS ~ U[0, 1],
+# 100 graphs, 100,000 interaction rounds each, l = 1, no opponent identity.
+# Produces the data behind Figures 3, 4, 5 and the WS row of Figure 9.
+
+num_steps: 100000
+repeat_experiment: 100
+select_partner: False
+
+state:
+  len_history: 1
+  agent_id: "none"
+
+agentnet:
+  name: "WS"
+  half_degree_regular: 2   # [paper] 4 edges per node in the initial regular graph
+  p_min: 0.0               # [paper] p_WS ~ U[0, 1]
+  p_max: 1.0
+  netsave_step: 10000

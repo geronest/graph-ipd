@@ -1,0 +1,60 @@
+# Shared settings for the experiments reported in
+#   "The Role of Network Topology and Opponent Information in Shaping
+#    Cooperation in Multi-Agent Reinforcement Learning Systems"
+#
+# Loaded automatically as the base for every configs/paper/*.yaml
+# (see utils/configs.prepare_config), then overwritten per experiment.
+#
+# Values marked [paper] are stated in the manuscript.
+# Values marked [repo default] are NOT stated in the paper and are carried
+# over from configs/test/default.yaml — confirm before citing them.
+
+device: "cpu"              # [repo default] set "gpu" to use CUDA when available
+profile_time: False
+save_models: True
+print_loss: False
+num_processes: 4           # [repo default] parallel repetitions; tune to your machine
+
+record_step: 100           # [paper] interaction outcomes summarised every 100 rounds
+
+random_seeds:              # [repo default] base seeds; each repetition offsets these
+  experiment: 2329
+  agent: 3247
+  selector: 8761
+  network: 4167
+  state: 5397
+
+matgame:
+  num_players: 2
+  num_actions: 2
+  multiplier: 1.0
+  # [paper] Section 2(a). Action 0 = defect, 1 = cooperate.
+  # Index order is (a0 * 2 + a1) -> [ (D,D), (D,C), (C,D), (C,C) ], so with
+  #   R = 0.2, S = -0.3, T = 0.3, P = -0.2
+  # row player reads  [P, T, S, R]  and column player  [P, S, T, R].
+  # Satisfies T > R > P > S and 2R > T + S.
+  scores:
+    - [-0.2, 0.3, -0.3, 0.2]
+    - [-0.2, -0.3, 0.3, 0.2]
+
+state:
+  len_history: 1           # [paper] l
+  history_type: "single"   # [paper] opponent's own actions only -> s in R^{2l}
+  agent_id: "none"         # [paper] "none" or "binary"; binary adds ceil(log2 N) dims
+  include_opponent_history: False
+
+dqn:                       # [paper] Section 3(a) dilemma-playing network
+  init_params: random
+  dims_hidden_layers: [32, 16]   # [paper] two hidden layers, 32 and 16 units
+  epsilon: 0.05                  # [paper] exploration rate
+  gamma: 0.99                    # [paper] discount rate
+  freq_refresh_target: 16        # [paper] target network copied every Z = 16 rounds
+  learning_rate: 0.01            # [repo default] not stated in the paper
+  weight_decay: 1e-3             # [repo default] not stated in the paper
+
+population:
+  dqn: 32                  # [paper] N = 32 agents
+
+agentnet:
+  name: complete
+  netsave_step: 1000

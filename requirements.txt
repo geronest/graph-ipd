@@ -1,0 +1,14 @@
+numpy==1.19.5
+scipy==1.5.4
+torch==1.10.2
+matplotlib==3.3.4
+pyyaml==6.0
+omegaconf==2.2.3
+pytest==7.0.1
+pandas==1.1.5
+pre-commit==2.17.0
+networkx==2.5.1
+tqdm==4.64.1
+ray[default]==2.0.1
+slack-sdk==3.21.3
+certifi==2022.12.7

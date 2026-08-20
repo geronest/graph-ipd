@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the paper below."
+title: "shMARL: multi-agent reinforcement learning for iterated games on graphs"
+abstract: >-
+  Simulation code for studying the emergence of cooperation among deep
+  reinforcement learning agents playing the two-player Iterated Prisoner's
+  Dilemma over synthetic graph topologies, with and without partner selection
+  and opponent identity information.
+type: software
+license: MIT
+repository-code: "https://github.com/geronest/shMARL"
+authors:
+  - family-names: Son
+    given-names: Seongho
+    affiliation: University College London
+    email: seong.son.22@ucl.ac.uk
+  - family-names: Hailes
+    given-names: Stephen
+    affiliation: University College London
+  - family-names: Musolesi
+    given-names: Mirco
+    affiliation: "University College London; University of Bologna"
+preferred-citation:
+  type: article
+  title: >-
+    The Role of Network Topology and Opponent Information in Shaping
+    Cooperation in Multi-Agent Reinforcement Learning Systems
+  authors:
+    - family-names: Son
+      given-names: Seongho
+    - family-names: Hailes
+      given-names: Stephen
+    - family-names: Musolesi
+      given-names: Mirco
+  year: 2026
+  # TODO: fill in once the paper has a venue / DOI / arXiv id
+  # journal: "Proceedings of the Royal Society A"
+  # doi: ""

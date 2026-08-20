@@ -1,0 +1,42 @@
+# Tiny end-to-end smoke run: same code path as the paper experiments,
+# 4 agents / 200 rounds instead of 32 / 100000. Finishes in seconds.
+num_steps: 200
+record_step: 50
+repeat_experiment: 2
+num_processes: 1
+device: "cpu"
+save_models: False
+select_partner: True
+matgame:
+  num_players: 2
+  num_actions: 2
+  multiplier: 1.0
+  scores:
+    - [-0.2, 0.3, -0.3, 0.2]
+    - [-0.2, -0.3, 0.3, 0.2]
+state:
+  len_history: 1
+  history_type: "single"
+  agent_id: "binary"
+dqn:
+  init_params: random
+  dims_hidden_layers: [32, 16]
+  epsilon: 0.05
+  gamma: 0.99
+  freq_refresh_target: 16
+  learning_rate: 0.01
+  weight_decay: 1e-3
+population:
+  dqn: 4
+agentnet:
+  name: complete
+  netsave_step: 200
+sac_ps:
+  init_params: random
+  dims_hidden_layers: [32, 16]
+  learning_rate: 0.01
+  gamma: 0.99
+  alpha: 0.01
+  tau: 0.05
+  weight_decay: 1e-3
+  freq_refresh_target: 16

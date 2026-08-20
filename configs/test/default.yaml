@@ -1,0 +1,75 @@
+device: "gpu" # default "cpu". if "gpu", will use GPU only when possible
+profile_time: True # default False.
+repeat_experiment: 2
+num_processes: 2
+num_steps: 10000
+record_step: 1000 # every RECORD_STEP summaries are recorded
+save_models: True
+print_loss: False
+
+select_partner: False # whether to use partner selection. if not specified, False
+freq_rewire: -1 # whether to use rewiring. set <0 for disabling
+
+random_seeds:
+  experiment: 2329
+  agent: 3247
+  selector: 8761
+  network: 4167
+  state: 5397
+
+matgame:
+  num_players: 2
+  num_states: 2
+  num_actions: 2
+  scores: # action 0: defect, action 1: cooperate
+    - [1, 3, 0, 2]
+    - [1, 0, 3, 2]
+
+state:
+  len_history: 1 # default 1
+  history_type: "single" # {"single", "pair"}, default "single"
+  agent_id: "none" # {"none", "onehot", "binary"}, default "none"
+  include_opponent_history: False # {True, False}
+
+tabularq:
+  init_params: random # 'zero', 'random'
+  learning_rate: 0.1
+  epsilon: 0.05
+  gamma: 0.99
+
+dqn:
+  init_params: random # 'zero', 'random'
+  dims_hidden_layers: [32, 32]
+  learning_rate: 0.01
+  epsilon: 0.05
+  gamma: 0.99
+  freq_refresh_target: 10
+  weight_decay: 1e-3
+  # p_favour_cooperation: 0.8 # deactivated when not included
+  # epsilon_decay:
+  #   min_eps: 1e-1
+  #   end_step: 0.95 # multiply to num_steps
+
+population:
+  dqn: 2
+
+agentnet:
+  name: complete
+  # modifications:
+    # modify_step: 100
+    # randomly_choose_agent: False
+    # preference_criterion: "degree" # default "degree".
+    # preferential_detachment:
+    #   select_high: True
+    #   select_prob: False
+    #   min_neighbours: 1
+    # preferential_attachment:
+    #   select_high: False
+    #   select_prob: False
+  netsave_step: 1000 # need to be multiple of RECORD_STEP
+
+schedule:
+  lr_decay:
+    use: False
+    min_lr: 1e-4
+    end_step: 0.95 # multiply to num_steps
